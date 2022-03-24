@@ -1,10 +1,14 @@
-get_number = input ("choose a number: ")
+greeting = ("hello world")
+sides = "*" * 3
 
-times_five = get_number * 5
+greeting = "{} {} {}".format(sides, greeting, sides)
+top_bottom = "*" * len(greeting)
 
-print (times_five)
+print()
+print(greeting)
+print(top_bottom)
 
-answer = ("{} times five is equal to {}". format (get_number , times_five))
 
-print(answer)
+
+
 

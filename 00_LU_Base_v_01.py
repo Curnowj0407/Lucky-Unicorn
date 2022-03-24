@@ -1,27 +1,24 @@
+import random
+
+
+# checks for yes / no responses
 def yes_no(question):
     valid = False
     while not valid:
         response  = input(question).lower()
 
-    
-    
-        if response == "yes" or response =="y": 
+
+
+        if response == "yes" or response =="y":
                 return "yes"
 
         elif response == "no" or response == "n":
-            return "no" 
+            return "no"
         else:
             print("please answer yes / no")
 
 
-def instructions():
-    print("**** how to play ****")
-    print()
-    print("the rules of the game go here")
-    print()
-    return ""
-
-
+# checks for an integer between low and high
 def num_check(question, low, high):
 
     error = "Please enter an integer between 1 and 10\n"
@@ -42,28 +39,56 @@ def num_check(question, low, high):
         except ValueError:
             print(error)
 
-played_before = yes_no("have you played the game before?")
+
+# shows instructions when needed
+def instructions():
+    print()
+    statement_generator("**** how to play ****", "*")
+    print()
+    print("the rules of the game go here")
+    print()
+    return ""
+
+
+# decorate print statements
+def statement_generator(statement, decoration):
+
+    sides = decoration * 3
+
+    statement = "{} {} {}".format(sides, statement, sides)
+    top_bottom = decoration * len(statement)
+
+    print(top_bottom)
+    print(statement)
+    print(top_bottom)
+
+    return ""
+
+# ******** Main Routine starts here *******
+
+statement_generator("Welcome to the LU Game", "-")
+
+# show instructions...
+played_before = yes_no("do you want to See instructions?")
 
 
 if played_before == "no":
-    instructions()
-else:
-    ("program continues")
+    print("program continues")
 
+else:
+    instructions()
+
+print()
 
 # Ask user how much they to play with...
 how_much = num_check("how much would you like to play with? ", 0, 10)
-import random
 
 balance = how_much
 
 rounds_played = 0
 
-
-
 play_again = input("press<Enter> to play...").lower()
 while play_again == "":
-
 
     # increase # of rounds played
     rounds_played += 1
@@ -86,7 +111,6 @@ while play_again == "":
     elif 6 <= chosen_num <= 36:
         chosen = "donkey"
         balance -= 1
-
 
     # the token is either a horse or zebra...
     # in both cases, subtract $0.50 from the balance
@@ -111,3 +135,7 @@ while play_again == "":
     else:
         play_again = input("press Enter to play again or 'xxx' to quit")
 
+
+print()
+end_statement = "Thank you for playing.  Your final balance is ${:.2f}".format(balance)
+statement_generator(end_statement, "*")
